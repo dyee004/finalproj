@@ -512,6 +512,7 @@ unsigned char col = -1;
 void ball_tick(){
 	switch(ball_state){
 		case Start5:
+			score = 0;
 			ball_state = Init5;
 			break;
 		case Init5:
@@ -542,27 +543,12 @@ void ball_tick(){
 			computerScore = 0;
 			break;
 		case Init5:
-			if(score == 0){
-				row = 0;
-				col = 1;
-				ballCIndex = 4;
-				ballRIndex = 4;
-			}
-			else if(score == 1){
-				row = 0;
-				col = 1;
-				ballCIndex = 3;
-				ballRIndex = 3;
-			}
-			else if(score == 2){
-				row = 0;
-				col = -1;
-				ballCIndex = 5;
-				ballRIndex = 5;
-			}
+			row = 0;
+			col = 1;
+			ballCIndex = 4;
+			ballRIndex = 4;
 			break;
 		case Move5:
-			score = 0;
 			ballRIndex = ballRIndex + row;
 			ballCIndex = ballCIndex + col;
 			if(ballCIndex == 1 || ballCIndex == 0){
@@ -803,7 +789,7 @@ int main(void)
     /* Replace with your application code */
 
     DDRA = 0x00; PORTA = 0xFF;
-	DDRB = 0x00; PORTB = 0xFF;
+    DDRB = 0x00; PORTB = 0xFF;
     DDRC = 0xFF; PORTC = 0x00;
     DDRD = 0xFF; PORTD = 0x00;
 
@@ -836,11 +822,11 @@ int main(void)
     task3.elapsedTime = task3.period;
     task3.TickFct = &button_tick;
 	
-	// Task 4
-	task4.state = Start4;
-	task4.period = 100;
-	task4.elapsedTime = task4.period;
-	task4.TickFct = &paddle_tick;
+    // Task 4
+    task4.state = Start4;
+    task4.period = 100;
+    task4.elapsedTime = task4.period;
+    task4.TickFct = &paddle_tick;
 
     // Task 5
     task5.state = Start5;
@@ -848,23 +834,23 @@ int main(void)
     task5.elapsedTime = task5.period;
     task5.TickFct = &ball_tick;
 
-	// Task 6
-	task6.state = Start6;
-	task6.period = 100;
-	task6.elapsedTime = task6.period;
-	task6.TickFct = &comp_tick;
+    // Task 6
+    task6.state = Start6;
+    task6.period = 100;
+    task6.elapsedTime = task6.period;
+    task6.TickFct = &comp_tick;
 	
-	// Task 7
-	task6.state = Start7;
-	task6.period = 100;
-	task6.elapsedTime = task6.period;
-	task6.TickFct = &matrix_tick;
+    // Task 7
+    task6.state = Start7;
+    task6.period = 100;
+    task6.elapsedTime = task6.period;
+    task6.TickFct = &matrix_tick;
 	
 
 
     TimerSet(GCD);
     TimerOn();
-	  LCD_init();
+    LCD_init();
     HC595Init();
     HC595Init2();
 	
