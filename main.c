@@ -230,7 +230,7 @@ void lcd_tick(){
 			lcd_state = Display;
 			break;
 		case Display:
-			if( countdown <= 0){
+			if(countdown <= 0){
 				if(userScore > computerScore){
 					LCD_ClearScreen();
 					lcd_state = Win;
@@ -512,7 +512,6 @@ unsigned char col = -1;
 void ball_tick(){
 	switch(ball_state){
 		case Start5:
-			score = 0;
 			ball_state = Init5;
 			break;
 		case Init5:
@@ -539,6 +538,7 @@ void ball_tick(){
 	}
 	switch(ball_state){
 		case Start5:
+			score = 0;
 			userScore = 0;
 			computerScore = 0;
 			break;
